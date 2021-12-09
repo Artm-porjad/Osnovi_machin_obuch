@@ -1,3 +1,42 @@
+# nomer 1
+# Инкапсуляция — ограничение доступа к составляющим объект компонентам (методам и переменным). Инкапсуляция делает некоторые из компоненты доступными только внутри класса. Могут возникнуть ситуации, когда пользователь может ввести некорректное значение, для этого и существует инкапсуляция, чтобы ограничить возможности при работе с классами. в python всё равно можно получить скрытые данные и изменить их, скорее это является условностьюи программист сам долже заботиться о её сохранности.
+# Статический метод не может изменять ни состояние объекта, ни состояние класса. Статические методы ограничены в том, к каким данным они могут получить доступ. Параметр self это ссылка на конкретный экземпляр класса. Параметр self является ссылкой на первый объект (экземпляр), его можно изменить, однако есть устоявшееся правило, и если его нарушить у других людей могут возникнуть трудности при чтении кода
+# class Dog:
+#     def __init__(self, name):
+#         self.__name = name
+#         self.__age = 1
+#
+#     def set_age(self, age):
+#         if age in range(1, 20):
+#             self.__age = age
+#         else:
+#             print("Недопустимый возраст")
+#
+#     def get_age(self):
+#         return self.__age
+#
+#     def get_name(self):
+#         return self.__name
+#
+#     def private(self):
+#         print("Кличка =", self.__name, "Возраст =", self.__age)
+#
+#     def __private(self):
+#         self.__fam = 14
+#         return self.__fam
+#         print("Приватный метод")
+# a = Dog("Bobik")
+# a.set_age(23)
+# a.set_age(3)
+# a.private()
+# class A:
+#   @staticmethod
+#   def meth(value):
+#     print(value)
+# a = A()
+# a.meth(1)
+# A.meth('hello')
+
 # nomer 2
 # import math
 #
@@ -119,6 +158,52 @@
 # a = complex('23+1j', '2+1j', True)
 # a.delen()
 
+# nomer 3
+# class Vector:
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+#
+#     def __str__(self):
+#         return str((self.x, self.y, self.z))
+#
+#     def __add__(self, b):
+#         x = self.x + b.x
+#         y = self.x + b.y
+#         z = self.x + b.z
+#         return Vector(x, y, z)
+#
+#     def __sub__(self, b):
+#         x = self.x - b.x
+#         y = self.x - b.y
+#         z = self.x - b.z
+#         return Vector(x, y, z)
+#
+#     def __mul__(self, b):
+#         if type(b) is Vector:
+#             s = self.x * b.x + self.y * b.y + self.z * b.z
+#             return s
+#         else:
+#             return Vector(self.x * b, self.y * b, self.z * b)
+#
+#     def __abs__(self):
+#         return (self.x ** 2 + self.y ** 2) ** 0.5
+#
+#     def cos_angle(self, b):
+#         return (self * b) / (abs(self) * abs(b))
+#
+#
+# v1 = Vector(1, 1, 1)
+# v2 = Vector(1, 3, -2)
+# v = v1 + v2
+# print(v)
+# cf = v1 * v2
+# print(cf)
+# co = v1.cos_angle(v2)
+# print(co)
+# v3 = v1 * 10
+# print(v3)
 
 # 4
 
@@ -302,40 +387,79 @@
 # a.chtenie(A)
 
 # nomer 7
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# import typing as t
+#
+#
+# class Coffee:
+#     def __init__(self, dobavka: t.Optional[str] = None):
+#         if dobavka:
+#             raise Exception("Выбран 2 раза кофе")
+#
+#     stoim = 0
+#
+#
+# class Latte(Coffee):
+#     cost = 1
+#
+#
+# class Capuchino(Coffee):
+#     cost = 2
+#
+#
+# class Americano(Coffee):
+#     cost = 3
+#
+#
+# class Dobavka:
+#
+#     def __init__(self, dobavka: t.Optional[str] = None):
+#         if dobavka:
+#             Coffee.stoim += dobavka.cost
+#         else:
+#             raise Exception("Кофе не является аргументом")
+#
+#
+# class Sahar(Dobavka):
+#     cost = 0.1
+#
+#     def calculate_cost(self):
+#         print(Coffee.stoim + self.cost)
+#         Coffee.stoim = 0
+#
+#
+# class Slivki(Dobavka):
+#     cost = 0.2
+#
+#     def calculate_cost(self):
+#         print(Coffee.stoim + self.cost)
+#         Coffee.stoim = 0
+#
+#
+# class Kardamon(Dobavka):
+#     cost = 0.3
+#
+#     def calculate_cost(self):
+#         print(Coffee.stoim + self.cost)
+#         Coffee.stoim = 0
+#
+#
+# class Penka(Dobavka):
+#     cost = 0.4
+#
+#     def calculate_cost(self):
+#         print(Coffee.stoim + self.cost)
+#         Coffee.stoim = 0
+#
+#
+# class Sirop(Dobavka):
+#     cost = 0.5
+#
+#     def calculate_cost(self):
+#         print(Coffee.stoim + self.cost)
+#         Coffee.stoim = 0
+#
+#
+# Penka(Sirop(Capuchino)).calculate_cost()
+# Kardamon(Penka(Sirop(Capuchino))).calculate_cost()
+# Latte(Kardamon(Penka(Sirop()))).calculate_cost
+# Latte(Kardamon(Penka(Sirop(Latte)))).calculate_cost
